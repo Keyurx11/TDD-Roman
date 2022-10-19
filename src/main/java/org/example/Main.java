@@ -1,12 +1,12 @@
 package org.example;
+
 import java.util.*;
 
 public class Main {
     private static Scanner stdin = new Scanner(System.in);
 
     public static void main(String[] args) throws splitNumberException {
-
-        System.out.println(convertDigitsToRoman(SplitNumbersIntoDigits(3245)));
+        //System.out.println(convertDigitsToRoman(SplitNumbersIntoDigits(3245)));
     }
 
     public static int[] SplitNumbersIntoDigits(int numberToConvert) throws splitNumberException {
@@ -20,36 +20,38 @@ public class Main {
         digit[2] = (numberToConvert % 100) / 10;
         digit[3] = numberToConvert % 10;
         return digit;
-
     }
 
     public static String convertDigitsToRoman(int[] digit) {
+        //creating multidimensional array to save characters of unit, ten, a hundred and a thousand
         String[][] roman = new String[][]{{"I", "V", "X"}, {"X", "L", "C"}, {"C", "D", "M"}, {"M"}};
-        String allDigitInRoman = "";
-        String digitInRoman = "";
-        int pwr = 4;
+        String allDigitsInRoman = "";
+        String eachDigitInRoman;
+        int pwr = digit.length;
         for (int i = 0; i < digit.length; i++) {
-            pwr--;
-            digitInRoman = "";
+
+            pwr--; //it goes as the count in array increases after iterating every array of digit so 4-1, 3-1,..
+            eachDigitInRoman = ""; //emptying String after each loop of digit.length
+
             if (digit[i] > 0 && digit[i] < 4) {
                 for (int j = 0; j < digit[i]; j++) {
-                    digitInRoman += roman[pwr][0];
+                    eachDigitInRoman += roman[pwr][0];
                 }
             } else if (digit[i] == 4) {
-                digitInRoman = roman[pwr][0] + roman[pwr][1];
+                eachDigitInRoman = roman[pwr][0] + roman[pwr][1];
             } else if (digit[i] == 5) {
-                digitInRoman = roman[pwr][1];
+                eachDigitInRoman = roman[pwr][1];
             } else if (digit[i] > 5 && digit[i] < 9) {
-                String plusA = "";
+                String plusOne = "";
                 for (int k = 5; k < digit[i]; k++) {
-                    plusA += roman[pwr][0];
+                    plusOne += roman[pwr][0];
                 }
-                digitInRoman = roman[pwr][1] + plusA;
+                eachDigitInRoman = roman[pwr][1] + plusOne;
             } else if (digit[i] == 9) {
-                digitInRoman = roman[pwr][0] + roman[pwr][2];
+                eachDigitInRoman = roman[pwr][0] + roman[pwr][2];
             }
-            allDigitInRoman += digitInRoman;
+            allDigitsInRoman += eachDigitInRoman;
         }
-        return allDigitInRoman;
+        return allDigitsInRoman;
     }
 }
