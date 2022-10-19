@@ -15,8 +15,6 @@ public class MainTest {
         assertArrayEquals(expectedResult4, Main.SplitNumbersIntoDigits(4));
         int[] expectedResult5 = {0, 0, 0, 9};
         assertArrayEquals(expectedResult5, Main.SplitNumbersIntoDigits(9));
-        int[] expectedResult6 = {0, 0, 0, 0};
-        assertThrows(splitNumberException.class, ()->{Main.SplitNumbersIntoDigits(-1);});
 
     }
 
@@ -57,30 +55,30 @@ public class MainTest {
 
     @Test
     public void TwoNumberInRoman() throws Exception {
-        Assertions.assertEquals("VII",Main.ConvertArabicToRoman(Main.SplitNumbersIntoDigits(7)));
-        Assertions.assertEquals("VII",Main.ConvertArabicToRoman(Main.SplitNumbersIntoDigits(1)));
-        Assertions.assertEquals("VII",Main.ConvertArabicToRoman(Main.SplitNumbersIntoDigits(5)));
-        Assertions.assertEquals("VII",Main.ConvertArabicToRoman(Main.SplitNumbersIntoDigits(3)));
-        Assertions.assertEquals("VII",Main.ConvertArabicToRoman(Main.SplitNumbersIntoDigits(8)));
+        Assertions.assertEquals("VII",Main.convertDigitsToRoman(Main.SplitNumbersIntoDigits(7)));
+        Assertions.assertEquals("I",Main.convertDigitsToRoman(Main.SplitNumbersIntoDigits(1)));
+        Assertions.assertEquals("V",Main.convertDigitsToRoman(Main.SplitNumbersIntoDigits(5)));
+        Assertions.assertEquals("III",Main.convertDigitsToRoman(Main.SplitNumbersIntoDigits(3)));
+        Assertions.assertEquals("VIII",Main.convertDigitsToRoman(Main.SplitNumbersIntoDigits(8)));
 
     }
 
     @Test
     public void unitNumberInRoman() throws Exception {
-        Assertions.assertEquals("XXXVII",Main.ConvertArabicToRoman(Main.SplitNumbersIntoDigits(37)));
-        Assertions.assertEquals("LXXI",Main.ConvertArabicToRoman(Main.SplitNumbersIntoDigits(71)));
-        Assertions.assertEquals("LV",Main.ConvertArabicToRoman(Main.SplitNumbersIntoDigits(55)));
-        Assertions.assertEquals("XCIII",Main.ConvertArabicToRoman(Main.SplitNumbersIntoDigits(93)));
-        Assertions.assertEquals("XX",Main.ConvertArabicToRoman(Main.SplitNumbersIntoDigits(20)));
+        Assertions.assertEquals("XXXVII",Main.convertDigitsToRoman(Main.SplitNumbersIntoDigits(37)));
+        Assertions.assertEquals("LXXI",Main.convertDigitsToRoman(Main.SplitNumbersIntoDigits(71)));
+        Assertions.assertEquals("LV",Main.convertDigitsToRoman(Main.SplitNumbersIntoDigits(55)));
+        Assertions.assertEquals("XCIII",Main.convertDigitsToRoman(Main.SplitNumbersIntoDigits(93)));
+        Assertions.assertEquals("XX",Main.convertDigitsToRoman(Main.SplitNumbersIntoDigits(20)));
 
     }
     @Test
     public void inRomanNumbers() throws Exception {
-        Assertions.assertEquals("CMXXXVII",Main.ConvertArabicToRoman(Main.SplitNumbersIntoDigits(937)));
-        Assertions.assertEquals("MMMCMXCIX",Main.ConvertArabicToRoman(Main.SplitNumbersIntoDigits(3999)));
-        Assertions.assertEquals("MXX",Main.ConvertArabicToRoman(Main.SplitNumbersIntoDigits(1020)));
-        Assertions.assertEquals("DLV",Main.ConvertArabicToRoman(Main.SplitNumbersIntoDigits(555)));
-        Assertions.assertEquals("VIIMMMDCCCLXXXVIII",Main.ConvertArabicToRoman(Main.SplitNumbersIntoDigits(3888)));
+        Assertions.assertEquals("CMXXXVII",Main.convertDigitsToRoman(Main.SplitNumbersIntoDigits(937)));
+        Assertions.assertEquals("MMMCMXCIX",Main.convertDigitsToRoman(Main.SplitNumbersIntoDigits(3999)));
+        Assertions.assertEquals("MXX",Main.convertDigitsToRoman(Main.SplitNumbersIntoDigits(1020)));
+        Assertions.assertEquals("DLV",Main.convertDigitsToRoman(Main.SplitNumbersIntoDigits(555)));
+        Assertions.assertEquals("MMMDCCCLXXXVIII",Main.convertDigitsToRoman(Main.SplitNumbersIntoDigits(3888)));
 
     }
 }

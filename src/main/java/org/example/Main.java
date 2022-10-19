@@ -1,5 +1,4 @@
 package org.example;
-
 import java.util.*;
 
 public class Main {
@@ -7,7 +6,7 @@ public class Main {
 
     public static void main(String[] args) throws splitNumberException {
 
-        ConvertArabicToRoman(SplitNumbersIntoDigits(321));
+        System.out.println(convertDigitsToRoman(SplitNumbersIntoDigits(3245)));
     }
 
     public static int[] SplitNumbersIntoDigits(int numberToConvert) throws splitNumberException {
@@ -21,87 +20,36 @@ public class Main {
         digit[2] = (numberToConvert % 100) / 10;
         digit[3] = numberToConvert % 10;
         return digit;
+
     }
 
-    public static String ConvertArabicToRoman(int[] digit) {
-        //char representation of roman number
-        char valueOf1 = 'I';
-        char valueOf5 = 'V';
-        char valueOf10 = 'X';
-        char valueOf50 = 'L';
-        char valueOf100 = 'C';
-        char valueOf500 = 'D';
-        char valueOf1000 = 'M';
-
-        //turning unit digit to a roman number
-        String unit = "";
-        if (digit[3] < 4) {
-            for (int i = 0; i < digit[3]; i++) {
-                unit += valueOf1;
+    public static String convertDigitsToRoman(int[] digit) {
+        String[][] roman = new String[][]{{"I", "V", "X"}, {"X", "L", "C"}, {"C", "D", "M"}, {"M"}};
+        String allDigitInRoman = "";
+        String digitInRoman = "";
+        int pwr = 4;
+        for (int i = 0; i < digit.length; i++) {
+            pwr--;
+            digitInRoman = "";
+            if (digit[i] > 0 && digit[i] < 4) {
+                for (int j = 0; j < digit[i]; j++) {
+                    digitInRoman += roman[pwr][0];
+                }
+            } else if (digit[i] == 4) {
+                digitInRoman = roman[pwr][0] + roman[pwr][1];
+            } else if (digit[i] == 5) {
+                digitInRoman = roman[pwr][1];
+            } else if (digit[i] > 5 && digit[i] < 9) {
+                String plusA = "";
+                for (int k = 5; k < digit[i]; k++) {
+                    plusA += roman[pwr][0];
+                }
+                digitInRoman = roman[pwr][1] + plusA;
+            } else if (digit[i] == 9) {
+                digitInRoman = roman[pwr][0] + roman[pwr][2];
             }
-        } else if (digit[3] == 4) {
-            unit = String.valueOf(valueOf1) + valueOf5;
-        } else if (digit[3] == 5) {
-            unit = String.valueOf(valueOf5);
-        } else if (digit[3] > 5 && digit[3] < 9) {
-            String plusUnit = "";
-            for (int i = 5; i < digit[3]; i++) {
-                plusUnit += valueOf1;
-            }
-            unit = valueOf5 + plusUnit;
-        } else if (digit[3] == 9) {
-            unit = String.valueOf(valueOf1) + valueOf10;
+            allDigitInRoman += digitInRoman;
         }
-
-        //turning tenth digit to a roman number
-        String ten = "";
-        if (digit[2] < 4) {
-            for (int i = 0; i < digit[2]; i++) {
-                ten += valueOf10;
-            }
-        } else if (digit[2] == 4) {
-            ten = String.valueOf(valueOf10) + valueOf50;
-        } else if (digit[2] == 5) {
-            ten = String.valueOf(valueOf50);
-        } else if (digit[2] > 5 && digit[2] < 9) {
-            String plusUnit = "";
-            for (int i = 5; i < digit[2]; i++) {
-                plusUnit += valueOf10;
-            }
-            ten = valueOf50 + plusUnit;
-        } else if (digit[2] == 9) {
-            ten = String.valueOf(valueOf10) + valueOf100;
-        }
-
-        //turning hundred digit to a roman number
-        String hundred = "";
-        if (digit[1] < 4) {
-            for (int i = 0; i < digit[1]; i++) {
-                hundred += valueOf100;
-            }
-        } else if (digit[1] == 4) {
-            hundred = String.valueOf(valueOf100) + valueOf500;
-        } else if (digit[1] == 5) {
-            hundred = String.valueOf(valueOf500);
-        } else if (digit[1] > 5 && digit[1] < 9) {
-            String plusUnit = "";
-            for (int i = 5; i < digit[1]; i++) {
-                plusUnit += valueOf100;
-            }
-            hundred = valueOf500 + plusUnit;
-        } else if (digit[1] == 9) {
-            hundred = String.valueOf(valueOf100) + valueOf1000;
-        }
-
-        ////turning thousand digit to a roman number
-        String thousand = "";
-        if (digit[0] < 4) {
-            for (int i = 0; i < digit[0]; i++) {
-                thousand += valueOf1000;
-            }
-        }
-
-        String romanNumber = thousand + hundred + ten + unit;
-        return romanNumber;
+        return allDigitInRoman;
     }
 }
